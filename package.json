@@ -1,0 +1,58 @@
+{
+  "name": "react-antd-app",
+  "version": "0.1.0",
+  "main": "src/index.tsx",
+  "private": true,
+  "description": "使用 React 和 Ant Design 实现的示例项目。",
+  "author": "Cesar Lai",
+  "license": "MIT",
+  "homepage": ".",
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.5.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.12.3",
+    "core-js": "^3.9.0",
+    "history": "^5.0.0",
+    "moment": "^2.29.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.33",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "@types/react-router-dom": "^5.1.7",
+    "craco": "^0.0.3",
+    "craco-less": "^1.17.1",
+    "typescript": "^4.2.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
