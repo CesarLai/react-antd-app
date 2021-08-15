@@ -20,11 +20,11 @@
     "noEmit": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "jsx": "react-jsx",
-    "baseUrl": "."
+    "jsx": "react-jsx"
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx"
-  ]
+  ],
+  "extends": "./tsconfig.paths.json"
 }

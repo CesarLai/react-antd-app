@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Redirect, Switch, BrowserRouter } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Login from "./pages/User/Login";
-import ErrorPage from "./pages/Error";
+import Home from "@/pages/Home";
+import Login from "@/pages/User/Login";
+import ErrorPage from "@/pages/Error";
 
 export default function App() {
   return (

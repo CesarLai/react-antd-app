@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import "./style/global.less";
+import "@/style/global.less";
 
 ReactDOM.render(
   <React.StrictMode>
