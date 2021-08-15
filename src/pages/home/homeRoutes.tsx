@@ -1,9 +1,9 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Dashboard from "../dashboard";
-import Projects from "../projects";
-import User from "../user/index/index";
+import Dashboard from "../Dashboard";
+import Projects from "../Projects";
+import User from "../User/Index";
 
 export default function HomeRoutes() {
   return (

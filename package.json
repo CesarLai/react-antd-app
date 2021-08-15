@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "src/index.tsx",
   "private": true,
-  "description": "使用 React 和 Ant Design 实现的示例项目。",
+  "description": "A React app sample with Ant Design.",
   "author": "Cesar Lai",
   "license": "MIT",
   "homepage": ".",

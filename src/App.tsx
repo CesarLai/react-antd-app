@@ -1,11 +1,9 @@
 import React from "react";
 import { Route, Redirect, Switch, BrowserRouter } from "react-router-dom";
 
-import Home from "../home";
-import Login from "../user/login";
-import ErrorPage from "../error";
-
-import "./index.module.less";
+import Home from "./pages/Home";
+import Login from "./pages/User/Login";
+import ErrorPage from "./pages/Error";
 
 export default function App() {
   return (

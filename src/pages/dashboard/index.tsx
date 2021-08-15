@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, PageHeader } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
-import logo from "../../images/logo.svg";
+import logo from "../../assets/logo.svg";
 import styles from "./index.module.less";
 
 export default function Dashboard() {

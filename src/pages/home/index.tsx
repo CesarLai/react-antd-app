@@ -9,7 +9,7 @@ import {
 import { Link, RouteComponentProps } from "react-router-dom";
 
 import HomeRoutes from "./homeRoutes";
-import logo from "../../images/logo.svg";
+import logo from "../../assets/logo.svg";
 
 import styles from "./index.module.less";
 

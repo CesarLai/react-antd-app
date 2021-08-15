@@ -1,7 +1,7 @@
 # react-antd-app
 
-使用 React 和 Ant Design 实现的示例项目。
+A React app sample with Ant Design.
 
-## 项目链接
+## Vercel App Link
 
-[Vercel 部署地址](https://react-antd-app-cesarlai.vercel.app)
+[Vercel App](https://react-antd-app-cesarlai.vercel.app)
