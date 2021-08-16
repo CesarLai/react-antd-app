@@ -7,6 +7,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Link, RouteComponentProps } from "react-router-dom";
+import { Location } from "history";
 
 import HomeRoutes from "./homeRoutes";
 import logo from "@/assets/logo.svg";
@@ -15,9 +16,15 @@ import styles from "./index.module.less";
 
 type AppProps = {} & RouteComponentProps;
 
+const getMenuKeyFromLocation = (location: Location) => {
+  return location.pathname.replace("/", "");
+};
+
 export default function App(props: AppProps) {
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedKey, setSelectedKey] = useState(props.match.path);
+  const [selectedKey, setSelectedKey] = useState(
+    getMenuKeyFromLocation(props.location)
+  );
 
   const onCollapse = (nextCollapsed: boolean, type: CollapseType) => {
     if (type === "clickTrigger") {
@@ -30,9 +37,9 @@ export default function App(props: AppProps) {
   };
 
   useEffect(() => {
-    const key = props.match.path.replace("/", "");
+    const key = getMenuKeyFromLocation(props.location);
     setSelectedKey(key);
-  }, [props.match.path]);
+  }, [props.location]);
 
   return (
     <Layout className={styles.container}>
