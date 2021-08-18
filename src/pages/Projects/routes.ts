@@ -1,6 +1,6 @@
 import * as React from "react";
 import { withRouter } from "react-router-dom";
-import { UserOutlined } from "@ant-design/icons";
+import { ProjectOutlined } from "@ant-design/icons";
 
 import Locale from "./locales/zh-cn";
 
@@ -14,7 +14,7 @@ export default [
     menuOptions: {
       index: 1,
       name: Locale.PAGE_TITLE,
-      icon: UserOutlined,
+      icon: ProjectOutlined,
     },
   },
 ] as RouteConfig[];
