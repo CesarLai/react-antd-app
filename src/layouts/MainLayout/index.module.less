@@ -1,8 +1,26 @@
-@bg-white: #ffffff;
-@bg-gray: #f0f2f5;
+@white: #ffffff;
+@gray: #f0f2f5;
+@gray-light: #efefef;
+@black-common: #001529;
+@dark-blue-light: #012d57;
 
-@bg-page: @bg-white;
-@bg-page-content: @bg-gray;
+@bg-page: @white;
+@bg-page-content: @gray;
+@theme-light: @white;
+@theme-light-bg-sider-trigger-hover: @gray-light;
+@theme-dark: @black-common;
+@theme-dark-bg-sider-trigger-hover: @dark-blue-light;
+
+:global {
+  :local(.sider-trigger) {
+    &.light:hover {
+      background: @theme-light-bg-sider-trigger-hover;
+    }
+    &.dark:hover {
+      background: @theme-dark-bg-sider-trigger-hover;
+    }
+  }
+}
 
 .layout-main {
   width: 100vw;
@@ -11,5 +29,26 @@
 
   .layout-content {
     background: @bg-page-content;
+  }
+}
+
+.menu-nav {
+  .sider-trigger {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    cursor: pointer;
+    background-color: inherit;
+
+    .trigger-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 100%;
+      border: none;
+      background-color: inherit;
+      cursor: pointer;
+    }
   }
 }

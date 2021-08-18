@@ -29,7 +29,7 @@ const MainLayout: FC<LayoutProps> = (props) => {
       <PageHeader />
       <Layout>
         <MenuNav
-          theme="dark"
+          theme="light"
           routes={menuRoutes}
           currentRoute={props.currentRoute as MainLayoutRouteConfig}
         />
