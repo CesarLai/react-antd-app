@@ -1,0 +1,77 @@
+@primary-color: #1890ff;
+@white: #ffffff;
+@dark: #001529;
+
+@bg-page-header: @dark;
+@title-color: @white;
+@logo-url: url("@/assets/logo.svg");
+
+.page-header {
+  display: flex;
+  flex-shrink: 0;
+  height: 60px;
+  padding: 0 36px;
+  color: @title-color;
+  background: @bg-page-header;
+
+  .block {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    &.left {
+      flex-grow: 1;
+    }
+
+    &.right {
+      flex-shrink: 0;
+    }
+
+    .logo-view {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      cursor: pointer;
+
+      .logo {
+        width: 42px;
+        height: 42px;
+      }
+
+      .title {
+        margin-left: 12px;
+        font-weight: 600;
+        font-size: 18px;
+      }
+    }
+
+    .avatar {
+      background: @primary-color;
+      cursor: pointer;
+    }
+  }
+}
+
+:global {
+  .dropdown-user {
+    .ant-dropdown-menu-item {
+      min-width: 120px;
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+
+        .name {
+          color: #333333;
+          font-size: 16px;
+          line-height: 22px;
+        }
+
+        .permission {
+          color: #a0a0a0;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { LocaleModel } from "./types";
 
 export default {
-  PAGE_TITLE: "数据总览",
+  PAGE_TITLE: "项目列表",
 } as LocaleModel;
