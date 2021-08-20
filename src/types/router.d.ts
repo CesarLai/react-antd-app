@@ -8,7 +8,7 @@ interface Window {
 
 interface MenuOptions {
   index: number;
-  name: string;
+  name: ((locale: Lowercase<Locale>) => string) | string;
   icon: ComponentType<AntdIconProps>;
 }
 

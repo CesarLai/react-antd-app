@@ -10,6 +10,9 @@ window.Locale = LOCALE;
 
 const localeConfig = LOCALE === "en-US" ? enUS : zhCN;
 
+/**
+ * App Component
+ */
 export default function App() {
   return (
     <ConfigProvider locale={localeConfig}>

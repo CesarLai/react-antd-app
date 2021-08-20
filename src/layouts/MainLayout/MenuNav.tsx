@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import classNames from "classnames";
-import { Menu, MenuTheme, Layout } from "antd";
+import { Menu, MenuTheme, Layout, ConfigProvider } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
 import styles from "./index.module.less";
@@ -13,8 +13,10 @@ type MenuNavProps = {
   theme?: MenuTheme;
 } & RouteComponentProps;
 
+const ConfigConsumer = ConfigProvider.ConfigContext.Consumer;
+
 /**
- * 侧边栏导航组件
+ * Sider Nav Component
  */
 const MenuNav: FC<MenuNavProps> = (props: MenuNavProps) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -30,7 +32,7 @@ const MenuNav: FC<MenuNavProps> = (props: MenuNavProps) => {
   };
 
   /**
-   * 侧边栏开关组件
+   * Sider Nav Toggle Button View
    */
   const SiderTrigger = () => {
     const ICON_SIZE = 16;
@@ -49,34 +51,48 @@ const MenuNav: FC<MenuNavProps> = (props: MenuNavProps) => {
   };
 
   return (
-    <Layout.Sider
-      className={styles.menuNav}
-      theme={finalTheme}
-      collapsible
-      collapsed={collapsed}
-      trigger={<SiderTrigger />}
-      onCollapse={onCollapse}
-    >
-      <Menu
-        style={{ height: "100%" }}
-        theme={finalTheme}
-        mode="inline"
-        selectedKeys={[props.currentRoute.path]}
-      >
-        {props.routes.map((route) => {
-          const Icon = route.menuOptions.icon as FC;
-          return (
-            <Menu.Item
-              key={route.path}
-              icon={Icon ? <Icon /> : null}
-              onClick={() => onClickMenuItem(route.path)}
+    <ConfigConsumer>
+      {(contextValues) => {
+        const localeName =
+          (contextValues.locale?.locale as Lowercase<Locale>) ?? "zh-cn";
+
+        return (
+          <Layout.Sider
+            className={styles.menuNav}
+            theme={finalTheme}
+            collapsible
+            collapsed={collapsed}
+            trigger={<SiderTrigger />}
+            onCollapse={onCollapse}
+          >
+            <Menu
+              style={{ height: "100%" }}
+              theme={finalTheme}
+              mode="inline"
+              selectedKeys={[props.currentRoute.path]}
             >
-              {route.menuOptions.name}
-            </Menu.Item>
-          );
-        })}
-      </Menu>
-    </Layout.Sider>
+              {props.routes.map((route) => {
+                const Icon = route.menuOptions.icon as FC;
+                const menuTitle =
+                  typeof route.menuOptions.name === "function"
+                    ? route.menuOptions.name(localeName)
+                    : route.menuOptions.name;
+
+                return (
+                  <Menu.Item
+                    key={route.path}
+                    icon={Icon ? <Icon /> : null}
+                    onClick={() => onClickMenuItem(route.path)}
+                  >
+                    {menuTitle}
+                  </Menu.Item>
+                );
+              })}
+            </Menu>
+          </Layout.Sider>
+        );
+      }}
+    </ConfigConsumer>
   );
 };
 

@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { LayoutProps } from "./types";
 
 /**
- * 空布局组件，渲染页面的原始内容
+ * Blank Layout Component
+ *
+ * Just include page content.
  */
 const BlankLayout: FC<LayoutProps> = (props) => <>{props.children}</>;
 
-export default BlankLayout;
+export default memo(BlankLayout);

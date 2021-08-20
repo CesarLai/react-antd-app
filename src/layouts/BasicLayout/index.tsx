@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Layout } from "antd";
 
 import PageHeader from "@/components/PageHeader";
@@ -6,7 +6,9 @@ import { LayoutProps } from "../types";
 import styles from "./index.module.less";
 
 /**
- * 基本布局，包含顶部栏
+ * Basic Layout Component
+ *
+ * Include PageHeader component and page content.
  */
 const BasicLayout: FC<LayoutProps> = (props) => (
   <Layout className={styles.layoutBasic}>
@@ -15,4 +17,4 @@ const BasicLayout: FC<LayoutProps> = (props) => (
   </Layout>
 );
 
-export default BasicLayout;
+export default memo(BasicLayout);

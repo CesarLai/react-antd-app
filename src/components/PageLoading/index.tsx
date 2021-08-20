@@ -1,13 +1,19 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, memo } from "react";
 import { Spin } from "antd";
+
+import styles from "./index.module.less";
 
 type PageLoadingProps = PropsWithChildren<any>;
 
 /**
- * 页面Loading组件
+ * Page Loading Component
  */
 const PageLoading: FC<PageLoadingProps> = (props) => (
-  <Spin>{props.children}</Spin>
+  <div className={styles.loadingView}>
+    <Spin size="large" tip="loading">
+      {props.children}
+    </Spin>
+  </div>
 );
 
-export default PageLoading;
+export default memo(PageLoading);

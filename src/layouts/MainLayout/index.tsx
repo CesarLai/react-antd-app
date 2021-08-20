@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, memo } from "react";
 import { Layout } from "antd";
 
 import * as RouteUtil from "@/utils/route";
@@ -8,7 +8,9 @@ import { LayoutProps } from "../types";
 import styles from "./index.module.less";
 
 /**
- * 主布局，左侧展示页面导航，右侧展示页面内容
+ * Main Layout Component
+ *
+ * Include PageHeader component, MenuNav component and page content.
  */
 const MainLayout: FC<LayoutProps> = (props) => {
   const [menuRoutes, setMenuRoutes] = useState<MainLayoutRouteConfig[]>([]);
@@ -39,4 +41,4 @@ const MainLayout: FC<LayoutProps> = (props) => {
   );
 };
 
-export default MainLayout;
+export default memo(MainLayout);

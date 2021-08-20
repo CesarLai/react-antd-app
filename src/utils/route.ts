@@ -1,7 +1,7 @@
 /**
- * 判断是否为跳转路由配置
+ * Type guard of redirect route config.
  *
- * @param route 路由配置对象
+ * @param route route config object
  * @returns boolean
  */
 export function isRedirectRoute(route: any): route is RedirectRouteConfig {
@@ -9,9 +9,9 @@ export function isRedirectRoute(route: any): route is RedirectRouteConfig {
 }
 
 /**
- * 判断是否为布局路由配置
+ * Type Guard of layout route config.
  *
- * @param route 路由配置对象
+ * @param route route config object
  * @returns boolean
  */
 export function isLayoutRouteConfig(route: any): route is LayoutRouteConfig {
@@ -19,9 +19,9 @@ export function isLayoutRouteConfig(route: any): route is LayoutRouteConfig {
 }
 
 /**
- * 判断是否为主布局路由配置
+ * Type Guard of MainLayout route config.
  *
- * @param route 路由配置对象
+ * @param route route config object
  * @returns boolean
  */
 export function isMainLayoutRouteConfig(

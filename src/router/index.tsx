@@ -13,8 +13,7 @@ import PageLoading from "@/components/PageLoading";
 import * as RouteUtil from "@/utils/route";
 
 /**
- * 获取路由配置列表
- * 遍历 pages 目录下所有子目录，找出所有 routes.tsx 文件
+ * Get all route config by require.context.
  */
 function getRouteList() {
   let routes: RouteConfig[] = [];
@@ -28,10 +27,12 @@ function getRouteList() {
     console.warn(err.message);
   }
 
+  // default route
   routes.push({
     path: "/",
     redirect: "/dashboard",
   });
+  // page not found
   routes.push({
     path: "*",
     redirect: "/error/404",
@@ -45,7 +46,9 @@ const routes = getRouteList();
 console.log(">>> routes: ", JSON.stringify(routes));
 
 /**
- * 布局包装组件，根据路由配置使用相应的布局组件
+ * Layout Wrap Component
+ *
+ * Render layout by route config.
  */
 function LayoutComponent(
   props: PropsWithChildren<{ route: LayoutRouteConfig }>
@@ -71,9 +74,9 @@ function LayoutComponent(
 }
 
 /**
- * 根据路由配置获取相应的布局组件
+ * Access layout wrap component by route config.
  *
- * @param route 路由配置对象
+ * @param route route config object
  */
 function getLayoutComponent(route: LayoutRouteConfig): FC {
   const PageComponent = route.component as FC;

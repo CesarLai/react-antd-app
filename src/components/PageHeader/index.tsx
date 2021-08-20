@@ -1,67 +1,83 @@
-import { FC, useCallback } from "react";
+import { FC, useCallback, memo } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Avatar, Dropdown, Menu } from "antd";
+import { Avatar, Dropdown, Menu, ConfigProvider } from "antd";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import classNames from "classnames";
 
 import imgLogo from "@/assets/logo.svg";
-import Locale from "./locales/zh-cn";
+import { LocaleModel } from "./locales/types";
 import styles from "./index.module.less";
 
 type PageHeaderProps = RouteComponentProps;
 
+const ConfigConsumer = ConfigProvider.ConfigContext.Consumer;
+
 /**
- * 公共顶部栏组件
+ * Common Page Header Component
  */
-const PageHeader: FC<PageHeaderProps> = (props: PageHeaderProps) => {
+const PageHeader: FC<PageHeaderProps> = (props) => {
   const goIndex = () => {
     props.history.push("/");
   };
+
+  const goUserCenter = useCallback(() => {
+    props.history.push("/user");
+  }, [props]);
 
   const onLogout = useCallback(() => {
     props.history.push("/login");
   }, [props]);
 
   const userDropdownMenus = useCallback(
-    () => (
+    (locale: LocaleModel) => (
       <Menu>
         <Menu.Item key="menu-user-info">
           <div className="user-info">
-            <div className="name">路人甲</div>
-            <div className="permission">管理员</div>
+            <div className="name">{locale.MENU_USER_NAME}</div>
+            <div className="permission">{locale.MENU_USER_ROLE}</div>
           </div>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="menu-user">
-          <UserOutlined /> {Locale.MENU_USER_INFO}
+        <Menu.Item key="menu-user" onClick={goUserCenter}>
+          <UserOutlined /> {locale.MENU_USER_INFO}
         </Menu.Item>
         <Menu.Item key="menu-logout" onClick={onLogout}>
-          <LogoutOutlined /> {Locale.MENU_LOGOUT}
+          <LogoutOutlined /> {locale.MENU_LOGOUT}
         </Menu.Item>
       </Menu>
     ),
-    [onLogout]
+    [goUserCenter, onLogout]
   );
 
   return (
-    <div className={styles.pageHeader}>
-      <div className={classNames(styles.block, styles.left)}>
-        <div className={styles.logoView} onClick={goIndex}>
-          <img className={styles.logo} src={imgLogo} alt="logo" />
-          <div className={styles.title}>{Locale.HEADER_TITLE}</div>
-        </div>
-      </div>
-      <div className={classNames(styles.block, styles.right)}>
-        <Dropdown
-          overlay={userDropdownMenus}
-          overlayClassName="dropdown-user"
-          placement="bottomRight"
-        >
-          <Avatar className={styles.avatar} icon={<UserOutlined />} />
-        </Dropdown>
-      </div>
-    </div>
+    <ConfigConsumer>
+      {(contextValues) => {
+        const localeName = contextValues.locale?.locale ?? "zh-cn";
+        const Locale = require(`./locales/${localeName}`)
+          .default as LocaleModel;
+
+        return (
+          <div className={styles.pageHeader}>
+            <div className={classNames(styles.block, styles.left)}>
+              <div className={styles.logoView} onClick={goIndex}>
+                <img className={styles.logo} src={imgLogo} alt="logo" />
+                <div className={styles.title}>{Locale.HEADER_TITLE}</div>
+              </div>
+            </div>
+            <div className={classNames(styles.block, styles.right)}>
+              <Dropdown
+                overlay={userDropdownMenus(Locale)}
+                overlayClassName="dropdown-user"
+                placement="bottomRight"
+              >
+                <Avatar className={styles.avatar} icon={<UserOutlined />} />
+              </Dropdown>
+            </div>
+          </div>
+        );
+      }}
+    </ConfigConsumer>
   );
 };
 
-export default withRouter(PageHeader);
+export default memo(withRouter(PageHeader));
