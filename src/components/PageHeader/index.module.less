@@ -1,10 +1,12 @@
 @primary-color: #1890ff;
 @white: #ffffff;
 @dark: #001529;
+@dark-light: #0e233a;
 
 @bg-page-header: @dark;
 @title-color: @white;
 @logo-url: url("@/assets/logo.svg");
+@bg-hover-button-locale: @dark-light;
 
 .page-header {
   display: flex;
@@ -46,8 +48,22 @@
     }
 
     .avatar {
+      margin-right: 12px;
       background: @primary-color;
       cursor: pointer;
+    }
+
+    .locale-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 100%;
+      cursor: pointer;
+
+      &:hover {
+        background-color: @bg-hover-button-locale;
+      }
     }
   }
 }
@@ -71,6 +87,17 @@
           color: #a0a0a0;
           font-size: 13px;
         }
+      }
+    }
+  }
+
+  .dropdown-locale {
+    .ant-dropdown-menu-item {
+      display: flex;
+      align-items: center;
+
+      .title {
+        margin-left: 8px;
       }
     }
   }

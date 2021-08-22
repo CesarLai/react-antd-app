@@ -1,4 +1,4 @@
-import GlobalLocale from "@/locales/zh-cn";
+import GlobalLocale from "@/locales/en-US";
 import { LocaleModel } from "./types";
 
 export default {
@@ -7,4 +7,6 @@ export default {
   MENU_USER_ROLE: "Manager",
   MENU_USER_INFO: "User Center",
   MENU_LOGOUT: "Logout",
+  LOCALE_MENU_ZH_CN: "中文",
+  LOCALE_MENU_EN_US: "English",
 } as LocaleModel;
