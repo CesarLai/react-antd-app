@@ -6,7 +6,7 @@ import { LocaleModel } from "./locales/types";
 
 const Projects = withRouter(React.lazy(() => import("./index")));
 
-const getLocale = (locale: Lowercase<Locale>) =>
+const getLocale = (locale: Locale) =>
   require(`./locales/${locale}`).default as LocaleModel;
 
 export default [
@@ -16,7 +16,7 @@ export default [
     layout: "main",
     menuOptions: {
       index: 1,
-      name: (locale: Lowercase<Locale>) => getLocale(locale).PAGE_TITLE,
+      name: (locale) => getLocale(locale).PAGE_TITLE,
       icon: ProjectOutlined,
     },
   },

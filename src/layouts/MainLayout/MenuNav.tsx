@@ -1,11 +1,12 @@
-import { FC, useState } from "react";
+import { FC, useState, CSSProperties } from "react";
+import { useSelector } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import classNames from "classnames";
-import { Menu, MenuTheme, Layout, ConfigProvider } from "antd";
+import { Menu, MenuTheme, Layout } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
+import { RootReducerState } from "@/store/types";
 import styles from "./index.module.less";
-import { CSSProperties } from "react";
 
 type MenuNavProps = {
   routes: MainLayoutRouteConfig[];
@@ -13,12 +14,14 @@ type MenuNavProps = {
   theme?: MenuTheme;
 } & RouteComponentProps;
 
-const ConfigConsumer = ConfigProvider.ConfigContext.Consumer;
-
 /**
  * Sider Nav Component
  */
 const MenuNav: FC<MenuNavProps> = (props: MenuNavProps) => {
+  const localeValue = useSelector(
+    (state: RootReducerState) => state.locale.locale
+  );
+
   const [collapsed, setCollapsed] = useState(false);
 
   const finalTheme = props.theme ?? "dark";
@@ -37,6 +40,7 @@ const MenuNav: FC<MenuNavProps> = (props: MenuNavProps) => {
   const SiderTrigger = () => {
     const ICON_SIZE = 16;
     const iconStyle: CSSProperties = { fontSize: ICON_SIZE };
+
     return (
       <div className={classNames(styles.siderTrigger, finalTheme)}>
         <button className={styles.triggerButton}>
@@ -51,48 +55,39 @@ const MenuNav: FC<MenuNavProps> = (props: MenuNavProps) => {
   };
 
   return (
-    <ConfigConsumer>
-      {(contextValues) => {
-        const localeName =
-          (contextValues.locale?.locale as Lowercase<Locale>) ?? "zh-cn";
+    <Layout.Sider
+      className={styles.menuNav}
+      theme={finalTheme}
+      collapsible
+      collapsed={collapsed}
+      trigger={<SiderTrigger />}
+      onCollapse={onCollapse}
+    >
+      <Menu
+        style={{ height: "100%" }}
+        theme={finalTheme}
+        mode="inline"
+        selectedKeys={[props.currentRoute.path]}
+      >
+        {props.routes.map((route) => {
+          const Icon = route.menuOptions.icon as FC;
+          const menuTitle =
+            typeof route.menuOptions.name === "function"
+              ? route.menuOptions.name(localeValue)
+              : route.menuOptions.name;
 
-        return (
-          <Layout.Sider
-            className={styles.menuNav}
-            theme={finalTheme}
-            collapsible
-            collapsed={collapsed}
-            trigger={<SiderTrigger />}
-            onCollapse={onCollapse}
-          >
-            <Menu
-              style={{ height: "100%" }}
-              theme={finalTheme}
-              mode="inline"
-              selectedKeys={[props.currentRoute.path]}
+          return (
+            <Menu.Item
+              key={route.path}
+              icon={Icon ? <Icon /> : null}
+              onClick={() => onClickMenuItem(route.path)}
             >
-              {props.routes.map((route) => {
-                const Icon = route.menuOptions.icon as FC;
-                const menuTitle =
-                  typeof route.menuOptions.name === "function"
-                    ? route.menuOptions.name(localeName)
-                    : route.menuOptions.name;
-
-                return (
-                  <Menu.Item
-                    key={route.path}
-                    icon={Icon ? <Icon /> : null}
-                    onClick={() => onClickMenuItem(route.path)}
-                  >
-                    {menuTitle}
-                  </Menu.Item>
-                );
-              })}
-            </Menu>
-          </Layout.Sider>
-        );
-      }}
-    </ConfigConsumer>
+              {menuTitle}
+            </Menu.Item>
+          );
+        })}
+      </Menu>
+    </Layout.Sider>
   );
 };
 
