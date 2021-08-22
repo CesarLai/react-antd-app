@@ -1,4 +1,10 @@
-import React, { useEffect, PropsWithChildren, ComponentType, FC } from "react";
+import {
+  Suspense,
+  useEffect,
+  PropsWithChildren,
+  ComponentType,
+  FC,
+} from "react";
 import {
   HashRouter,
   Redirect,
@@ -68,7 +74,7 @@ function LayoutComponent(
 
   return (
     <Layout routes={routes} currentRoute={props.route}>
-      {props.children}
+      <Suspense fallback={<PageLoading />}>{props.children}</Suspense>
     </Layout>
   );
 }
@@ -93,22 +99,20 @@ function SwitchRouterComponent(props: RouteComponentProps) {
   }, [props.location]);
 
   return (
-    <React.Suspense fallback={<PageLoading />}>
-      <Switch>
-        {routes.map((route, index) =>
-          RouteUtil.isRedirectRoute(route) ? (
-            <Redirect exact key={index} from={route.path} to={route.redirect} />
-          ) : (
-            <Route
-              key={index}
-              path={route.path}
-              exact={false}
-              component={getLayoutComponent(route)}
-            />
-          )
-        )}
-      </Switch>
-    </React.Suspense>
+    <Switch>
+      {routes.map((route, index) =>
+        RouteUtil.isRedirectRoute(route) ? (
+          <Redirect exact key={index} from={route.path} to={route.redirect} />
+        ) : (
+          <Route
+            key={index}
+            path={route.path}
+            exact={false}
+            component={getLayoutComponent(route)}
+          />
+        )
+      )}
+    </Switch>
   );
 }
 
